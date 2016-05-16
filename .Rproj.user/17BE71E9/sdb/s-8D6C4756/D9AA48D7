@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "## Put comments here that give an overall description of what your\n## functions do\n#   Matrix inversion is a costly computational operation. Caching the inverse of a \n#   matrix instead of repeatetly compuiting it will lower the cost of the operation. The\n#   following two functions are used to cretae and cache the inverse of a matrix.\n#   The makeCacheMatrix function creates a special \"matrix\" object that can cache its inverse\n#   The makeCacheMatrix function is very similar to the makeVector (almost identical)\n\n## Write a short comment describing this function\n# The makeCacheMatrix function creates a special \"matrix\" object that can cache its inverse\n#   set the value of the matrix\n#   get the value of the matrix\n#   set the value of inverse of the matrix\n#   get the value of inverse of the matrix\n\nmakeCacheMatrix <- function(x = matrix()) {\n        inv <- NULL\n        set <- function(y) {\n                x <<- y\n                inv <<- NULL\n        }\n        get <- function() x\n        setinverse <- function(inv) inv <<- inv\n        getinverse <- function() inv\n        list(set=set, get=get, setinverse=setinverse, getinverse=getinverse)\n}\n\n\n## Write a short comment describing this function\n# The inverse of the matrix is computed by the cacheSolve function as follows:\n# Retrieve the ineverse matrix from cache\n# If the return value is not NULL the inverse was already computed, \n# Therefore the inverse gets returned from the cache. \n# Clearly the first time the code runs the iverse will be computed \n# since it will not exist in cache.  Once the inverse is computed \n# it will be saved in cache using the setinverse function \n# to be retrieved the second time around\n# The cacheSolve function assumes that the matrix is always invertible.\n\ncacheSolve <- function(x, ...) {\n        ## Return a matrix that is the inverse of 'x'\n        inv <- x$getinverse()\n        if(!is.null(inv)) {\n                message(\"getting cached data.\")\n                return(inv)\n        }\n        data <- x$get()\n        inv <- solve(data, ...)\n        x$setinverse(inv)\n        inv\n}\n\n# Sample run\n#  x = rbind(c(2,3,0),c(1,3,4), c(1,2,1))\n#  m = makeCacheMatrix(x)\n#  m$get()\n#  [,1] [,2] [,3]\n#  [1,]    2    3    0\n#  [2,]    1    3    4\n#  [3,]    1    2    1\n#  cacheSolve(m) ## Inverse matrix is computed\n#  [,1] [,2] [,3]\n#  [1,]    5    3  -12\n#  [2,]   -3   -2    8\n#  [3,]    1    1   -3\n#  cacheSolve(m) ## Inverse matrix retrieved from cache",
+    "created" : 1463288130207.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2901218280",
+    "id" : "D9AA48D7",
+    "lastKnownWriteTime" : 1463430986,
+    "last_content_update" : -2147483648,
+    "path" : "C:/Users/Kykos/coursera/rProgramming/ProgrammingAssignment2/cachematrix.R",
+    "project_path" : "cachematrix.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
